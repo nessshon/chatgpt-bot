@@ -12,7 +12,7 @@ def init():
     env = Env()
     env.read_env()
 
-    bot = Bot(token=env.str("BOT_TOKEN"), parse_mode="HTML")
+    bot = Bot(token=env.str("BOT_TOKEN"), parse_mode=None)
     dp = Dispatcher(bot=bot, storage=MemoryStorage())
 
     import openai
