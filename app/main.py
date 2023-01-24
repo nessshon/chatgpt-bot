@@ -1,0 +1,20 @@
+from aiogram import Dispatcher
+
+
+async def on_startup(dp: Dispatcher):
+    from .bot import filters
+    filters.setup(dp)
+
+    from .bot import middlewares
+    middlewares.setup(dp)
+
+    from .bot import handlers
+    handlers.register(dp)
+
+
+async def on_shutdown(dp: Dispatcher):
+    await dp.storage.close()
+    await dp.storage.wait_closed()
+
+    session = await dp.bot.get_session()
+    await session.close()
